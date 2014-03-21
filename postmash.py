@@ -26,7 +26,7 @@ def twoposts():
 @app.route('/postwinner', methods=['POST'])
 def postwinner():
     data = request.json
-    data.update({"timestamp":datetime.now().strftime(TIME_FORMAT)})
+    data.update({"timestamp":datetime.now().strftime(TIME_FORMAT), "remote_addr":request.remote_addr})
     swf.WorkflowType(name='PostMashWorkflow', domain='PostMashDomain',version='1.0', task_list='PostMashTasks').start(input=json.dumps(data))
     return '0', 200
 
