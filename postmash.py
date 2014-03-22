@@ -3,6 +3,7 @@ from boto.dynamodb2.table import Table
 import boto.swf.layer2 as swf
 import json
 import logging
+import redis
 from logging.handlers import RotatingFileHandler
 from datetime import datetime
 TIME_FORMAT = '%Y-%m-%d %H:%M:%S'
