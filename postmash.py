@@ -26,7 +26,7 @@ def twoposts():
 	key2 = r.randomkey()
     post1 = r.get(key1)
     post2 = r.get(key2)
-    return json.dumps({'post1':dict(post1),'post2':dict(post2)})
+    return json.dumps({'post1':{'postid':key1,'text':post1},'post2':{'postid':key2,'text':post2}})
 
 @app.route('/postwinner', methods=['POST'])
 def postwinner():
