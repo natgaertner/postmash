@@ -3717,3 +3717,7 @@ input.search {
 input.disabled {
 	color: #666666;
 }
+
+#instructions {
+	text-align: center;
+}
