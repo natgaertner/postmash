@@ -11,7 +11,7 @@ file_handler = RotatingFileHandler('/var/log/postmash/application.log')
 file_handler.setLevel(logging.WARNING)
 app.logger.addHandler(file_handler)
 posts = Table('posts')
-
+r = redis.StrictRedis(host='localhost', port=6379, db=0)
 
 @app.route('/')
 def butt():
@@ -19,8 +19,12 @@ def butt():
 
 @app.route('/twoposts')
 def twoposts():
-    post1 = posts.get_item(postid='1')
-    post2 = posts.get_item(postid='2')
+    key1 = r.randomkey()
+    key2 = r.randomkey()
+    while key1 == key2:
+	key2 = r.randomkey()
+    post1 = r.get(key1)
+    post2 = r.get(key2)
     return json.dumps({'post1':dict(post1),'post2':dict(post2)})
 
 @app.route('/postwinner', methods=['POST'])
