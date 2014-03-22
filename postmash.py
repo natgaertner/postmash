@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, render_template
 from boto.dynamodb2.table import Table
 import boto.swf.layer2 as swf
 import json
@@ -16,7 +16,7 @@ r = redis.StrictRedis(host='localhost', port=6379, db=0)
 
 @app.route('/')
 def butt():
-    return 'Butt'
+    return render_template('index.html')
 
 @app.route('/twoposts')
 def twoposts():
