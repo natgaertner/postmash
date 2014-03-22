@@ -26,11 +26,11 @@ def twoposts():
 	key2 = r.randomkey()
     post1 = r.get(key1)
     post2 = r.get(key2)
-    return json.dumps({'post1':{'postid':key1,'text':post1},'post2':{'postid':key2,'text':post2}})
+    return json.dumps({'leftpost':{'postid':key1,'text':post1},'rightpost':{'postid':key2,'text':post2}})
 
-@app.route('/postwinner', methods=['POST'])
-def postwinner():
-    data = request.json
+@app.route('/mash', methods=['POST'])
+def mash():
+    data = dict(request.json)
     data.update({"timestamp":datetime.now().strftime(TIME_FORMAT), "remote_addr":request.remote_addr})
     swf.WorkflowType(name='PostMashWorkflow', domain='PostMashDomain',version='1.0', task_list='PostMashTasks').start(input=json.dumps(data))
     return '0', 200
