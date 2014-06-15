@@ -15,12 +15,13 @@ $(document).ready(function() {
 			winner = "left";
 		} else if (event.which == 39) {
 			winner = "right";
-		} else if (event.which == 38 || event.which == 40) {
+		} else if (event.which == 38) {
 			winner = "draw";
 		} else {
-			return false;
+			return;
 		}
 		$.ajax({
+		    async: false,
 		    type: "POST",
 		    url: "/mash",
 		    data: JSON.stringify({leftid:$("#leftpost").data("id"),rightid:$("#rightpost").data("id"),winner:winner}),
